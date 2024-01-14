@@ -2,21 +2,16 @@ import { useHelper } from "@react-three/drei";
 import { Car } from "./Car";
 import { Ground } from "./Ground";
 import { useRef } from "react";
-import { DirectionalLight, DirectionalLightHelper } from "three";
+import { SpotLight, SpotLightHelper } from "three";
 
 export function CarShow() {
-  const ref = useRef<DirectionalLight>(null!);
+  const ref = useRef<SpotLight>(null!);
 
-  useHelper(ref, DirectionalLightHelper, 5);
+  useHelper(ref, SpotLightHelper, "white");
 
   return (
     <>
-      <directionalLight
-        ref={ref}
-        intensity={2}
-        position={[0, 10, 0]}
-        castShadow
-      />
+      <spotLight ref={ref} intensity={50} position={[0, 5, 0]} />
       <Car />
       <Ground />
     </>
