@@ -1,8 +1,7 @@
-import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { useGLTF } from "@react-three/drei";
 
 export function Car() {
-  const gltf = useLoader(GLTFLoader, "/models/car.glb");
+  const gltf = useGLTF("/models/car.glb");
 
   return <primitive object={gltf.scene} />;
 }
