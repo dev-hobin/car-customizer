@@ -1,15 +1,17 @@
 import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { Loader, OrbitControls, useProgress } from "@react-three/drei";
 import { CarShow } from "./CarShow";
 import { Car, ColorType } from "./Car";
 import { ColorButton } from "./ColorButton";
 
 function App() {
   const [type, setType] = useState<ColorType>("BLACK");
+  const progress = useProgress();
+  const isLoaded = progress.active === false && progress.progress === 100;
 
   return (
-    <Suspense fallback={null}>
+    <>
       <Canvas
         shadows
         camera={{
@@ -19,14 +21,16 @@ function App() {
           position: [0, 3, 5],
         }}
       >
-        {/* <Leva /> */}
-        <OrbitControls />
-        <axesHelper args={[5]} />
-        <gridHelper args={[20, 20, 0xff0000, "teal"]} />
-        <color args={[0, 0, 0]} attach="background" />
-        <CarShow>
-          <Car color={type} />
-        </CarShow>
+        <Suspense fallback={null}>
+          {/* <Leva /> */}
+          <OrbitControls />
+          <axesHelper args={[5]} />
+          <gridHelper args={[20, 20, 0xff0000, "teal"]} />
+          <color args={[0, 0, 0]} attach="background" />
+          <CarShow>
+            <Car color={type} />
+          </CarShow>
+        </Suspense>
       </Canvas>
       <div
         style={{
@@ -35,7 +39,7 @@ function App() {
           width: "100%",
           top: "100%",
           bottom: 0,
-          display: "flex",
+          display: isLoaded ? "flex" : "none",
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -78,7 +82,8 @@ function App() {
           />
         </div>
       </div>
-    </Suspense>
+      <Loader />
+    </>
   );
 }
 
