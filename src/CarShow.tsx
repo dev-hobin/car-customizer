@@ -18,6 +18,7 @@ export function CarShow({
   useLayoutEffect(() => {
     if (!cameraRef.current) return;
     cameraRef.current.setTarget(0, 0, 0, false);
+    cameraRef.current.setPosition(0, 3, 5, false);
     cameraRef.current.mouseButtons.right = 0;
   }, []);
 

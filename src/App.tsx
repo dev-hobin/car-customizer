@@ -31,7 +31,7 @@ function App() {
         onWheel={() => setIsRotating(false)}
       >
         <Suspense fallback={null}>
-          <axesHelper args={[5]} />
+          {/* <axesHelper args={[5]} /> */}
           {/* <gridHelper args={[20, 20, 0xff0000, "teal"]} /> */}
           <color args={[0, 0, 0]} attach="background" />
           <CarShow isRotating={isRotating}>
