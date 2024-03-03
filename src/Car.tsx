@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useLayoutEffect } from "react";
-import { Color, Mesh, MeshStandardMaterial } from "three";
+import { Color, Mesh, MeshStandardMaterial, MathUtils } from "three";
 
 export type ColorType = "BLACK" | "WHITE" | "RED" | "ORANGE" | "BLUE";
 
@@ -46,6 +46,10 @@ export function Car({ color }: { color: ColorType }) {
   // 외판 - 66, color
   // NO STEP - 74, color
   // Side - 127, 137, emit
+
+  useLayoutEffect(() => {
+    gltf.scene.rotateY(MathUtils.degToRad(-30));
+  }, [gltf]);
 
   useLayoutEffect(() => {
     const mesh = gltf.nodes["Object_66"];
